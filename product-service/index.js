@@ -1,8 +1,10 @@
 const express = require("express")
 const { productRouter } = require("./handler/product")
+const { connectDB } = require("./config/connectDB")
 const app = express()
 require("dotenv").config()
 const {APP_PORT} = process.env
+connectDB()
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use("/product",productRouter)
@@ -17,5 +19,5 @@ app.use((error,req,res,next)=>{
     })
 })
 app.listen(APP_PORT,()=>{
-    console.log("Auth-Service running on http://localhost:4000");
+    console.log("Product-Service running on http://localhost:"+ APP_PORT);
 })
